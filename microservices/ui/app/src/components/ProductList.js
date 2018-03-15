@@ -26,15 +26,17 @@ class ProductList extends Component{
 			<div className="card-group" style={style4} >
 			{this.props.products.map(product => (
 			
+          <a className='productCardLink' href={'/product/'+product.id} style={style1} >      
       		<div className='productCard' key={product.id} style={style} >
-          		<a className='productCardLink' href={'/product/'+product.id} style={style1} >
+          		
             		<img className="card-img-top zoom" src={product.first_image_url} alt={product.name} style={style2} />
             		<div className="card-body">
               			<span className="card-title" style={style3}><b>{product.name.slice(0,20)}..</b></span>
               			<p className="card-text">  &#8377;{product.price}</p>
             		</div>
-          		</a>
+          		
       		</div>
+          </a>
       		))}
     		</div>
     		</div>
