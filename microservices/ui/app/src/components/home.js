@@ -6,7 +6,8 @@ class Home extends Component{
   constructor(){
         super();
         this.state={
-          products: []
+          products: [],
+          offers:[]
         }}
 
   loadData(){
@@ -18,15 +19,25 @@ class Home extends Component{
         });
       });
     }
+    loadOffers(){
+      fetch("https://app.banner20.hasura-app.io/offers")
+      .then(response => response.json())
+      .then(json => {
+        this.setState({
+          offers: json,
+        });
+      });
+    }
+  
     componentDidMount(){
       this.loadData();
+      this.loadOffers();
     }
     render(){
-
         return (
           <div>
           <div>
-          <ImageCarousel />
+          <ImageCarousel offers={this.state.offers}/>
           </div>
           <div className='container'>
           <ProductList products={this.state.products} />
