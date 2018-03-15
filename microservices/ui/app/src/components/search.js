@@ -10,12 +10,17 @@ class Search extends Component{
 			height:'200px',
 			borderRight: '1px thin black'
     	}
+    	const style1 ={
+    		textDecoration: 'none',
+			color: 'black'
+    	}
 		return(
 			<div className='container'>
 			
 				<h5>Showing {this.props.products.length} results for <b>'{this.props.searchTerm}'</b></h5>
 				{this.props.products.map(product => (
 				<div style={{marginTop:'30px'}}>
+				<a className='productCardLink' href={'/product/'+product.id} style={style1} >      
 				<div className='row' key={product.id}>
 					<div className='col-md-3' style={{borderRight:'2px solid black'}}>
 						<img src={product.first_image_url} alt="" style={style} />
@@ -30,6 +35,7 @@ class Search extends Component{
 					</div>
 
 				</div>
+				</a>
 				</div>
 				))}
 			</div>

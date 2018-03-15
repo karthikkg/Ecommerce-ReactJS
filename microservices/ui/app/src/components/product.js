@@ -102,13 +102,13 @@ class ImageCar extends Component{
         <div className='row'>
             
               <div className='col-md-4 card' data-target="#demo" data-slide-to="0" >
-                <img src={this.props.image1} alt={this.props.productName}  height="inherit"/>
+                <img src={this.props.image1} alt={this.props.productName}  style={{"maxHeight":"150px",'height':"inherit"}}/>
               </div>
               <div className='col-md-4 card'data-target="#demo" data-slide-to="1">
-                <img src={this.props.image2} alt={this.props.productName}  height="inherit"/>
+                <img src={this.props.image2} alt={this.props.productName}  style={{"maxHeight":"150px",'height':"inherit"}}/>
               </div>
               <div className='col-md-4 card' data-target="#demo" data-slide-to="2">
-                <img src={this.props.image3} alt={this.props.productName}  height="inherit"/>
+                <img src={this.props.image3} alt={this.props.productName}  style={{"maxHeight":"150px",'height':"inherit"}}/>
               </div>
 
         </div>
