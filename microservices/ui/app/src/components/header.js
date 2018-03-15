@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Cookies from 'universal-cookie';
 import Search from './search.js';
 
 class Header extends Component{
@@ -6,7 +7,8 @@ class Header extends Component{
 	constructor(){
         super();
         this.state={
-          products: []
+          products: [],
+          userName:''
         }}
 	search(e){
 		e.preventDefault();
@@ -41,6 +43,7 @@ class Header extends Component{
     }
     
 	render(){
+
 		if(this.state.products.length >0){
 		    var searchResult=<Search products={this.state.products} searchTerm={this.refs.keyword.value}/>;
 		    }
@@ -49,6 +52,18 @@ class Header extends Component{
 			backgroundColor:'#7c4dff',
 			textAlign: 'center'
 		};
+		const cookies = new Cookies();
+
+		const auth_token=cookies.get('auth_token') || 'None';
+		
+    	if(auth_token!='None'){
+      		var username = cookies.get('username') || 'None';
+      		
+      		var logIn = <a className="nav-link" href="/user">{username}</a>;
+	    }
+	    else{
+	    	var logIn = <a className="nav-link" href="/login">Login &amp; Signup</a>
+	    }
 		return(
 			<div>
 		<div className="row" style={style} >
@@ -70,7 +85,7 @@ class Header extends Component{
 		            <a className="nav-link" href="/">Home</a>
 		          </li>
 		          <li>
-		            <a className="nav-link" href="/login">Login &amp; Signup</a>
+		            {logIn}
 		          </li>
 		          <li>
 		            <a className="nav-link" href="/cart">Cart</a>
@@ -79,7 +94,7 @@ class Header extends Component{
 		            <a className="nav-link" href="/addProduct">Add Product</a>
 		          </li>
 		          <li>
-		            <a className="nav-link" href="/">Log Out</a>
+		            <a className="nav-link" href="/logout">Log Out</a>
 		          </li>
 		        </ul>
 		      </div>

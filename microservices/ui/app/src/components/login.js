@@ -5,6 +5,7 @@ import Cookies from 'universal-cookie';
 
 
 class Login extends Component{
+
 	signUp(e){
 			e.preventDefault();
 			const firstName = this.refs.signupFirstName.value;
@@ -123,6 +124,7 @@ class Login extends Component{
 	
 			requestOptions.body = JSON.stringify(body);
 	
+			
 			fetch(url, requestOptions)
 			.then(function(response) {
 				return response.json();
@@ -132,10 +134,15 @@ class Login extends Component{
 				// To save the auth token received to offline storage
 				const auth_token = result.auth_token
 				const hasura_id = result.hasura_id
+				const username = result.username
 				const cookies = new Cookies();
 				// cookies.set('username', 'username', { path: '/' });
+				
+				
 				cookies.set('auth_token', auth_token,{ path: '/' });
 				cookies.set('hasura_id', hasura_id,{ path: '/' });
+				cookies.set('username', username,{ path: '/' });
+				
 			})
 			.catch(function(error) {
 				console.log('Request Failed:' + error);
@@ -148,6 +155,7 @@ class Login extends Component{
 			boxShadow: '5px 5px 8px 5px #888888',
 			textAlign: 'left'
 		}
+		
 		return(
 			<div className='container'>
 			<div className='row'>
@@ -246,6 +254,7 @@ class Login extends Component{
 							</div>
 							</div>
 						</form>
+
 						</div>
 				</div>
 			</div>
