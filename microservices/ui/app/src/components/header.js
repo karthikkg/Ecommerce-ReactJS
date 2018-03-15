@@ -12,7 +12,7 @@ class Header extends Component{
         }}
 	search(e){
 		e.preventDefault();
-		alert('Please wait while results are loading')
+		
 
 		var keyword = this.refs.keyword.value.slice(1);
 		var url = "https://app.banner20.hasura-app.io/search";
@@ -73,7 +73,7 @@ class Header extends Component{
 		  
 		      <div className="col-md-4 " style={{paddingTop:'10px'}}>    
 		        <form className="form-inline" onSubmit={this.search.bind(this)}>
-		          <input className="form-control" type="text" ref='keyword'placeholder="Search" />
+		          <input className="form-control" type="text" onChange={this.search.bind(this)} ref='keyword'placeholder="Search" />
 		          <button className="btn btn-success" type="submit">Search</button>
 		        </form>
 		        
