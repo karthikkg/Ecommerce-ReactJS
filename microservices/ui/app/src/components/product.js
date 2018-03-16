@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import fetch from 'isomorphic-fetch';
+import Cookies from 'universal-cookie';
 
 class Product extends React.Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class Product extends React.Component {
             
 
           <ImageCar image1={this.state.productVariableImage} image2={this.state.productImage1} 
-            image3={this.state.productImage2} productName={p.product_name}
+            image3={this.state.productImage2} productName={p.product_name} product_id={p.product_id}
             price={p.price}
             description={p.product_description} category_name={p.category_name} seller_name={p.seller_name}
             sub_category_name={p.sub_category_name}
@@ -68,6 +69,49 @@ class Product extends React.Component {
 }
 
 class ImageCar extends Component{
+  handleCartSubmit(e){
+    e.preventDefault();
+    var url = "https://app.banner20.hasura-app.io/add_to_cart";
+    const cookies = new Cookies();
+    const hasura_id=cookies.get('hasura_id') || 'None';
+    const auth_token=cookies.get('auth_token') || 'None';
+    console.log(this.props.product_id)
+    if(hasura_id !== 'None'){
+          var requestOptions = {
+              "method": "POST",
+              "headers": {
+                  "Content-Type": "application/json"
+              }
+          };
+    
+          var body = {
+              "provider": "username",
+              "data": {
+                "hasura_id": parseInt(hasura_id),
+                "auth_token":auth_token,
+                "product_id": this.props.product_id
+              }
+          };
+      
+          requestOptions.body = JSON.stringify(body);
+      
+          fetch(url, requestOptions)
+          .then(function(response) {
+            console.log(response.json());
+          })
+          .then(function(result) {
+            console.log(result);
+          })
+          .catch(function(error) {
+            console.log('Request Failed:' + error);
+          });
+
+       alert('Added to Cart Successfully')
+      }
+      else{
+        alert('Please Login to add to cart')
+      }
+  }
   render(){
     return(
       <div>
@@ -125,9 +169,9 @@ class ImageCar extends Component{
             </div>
               <h4 className="card-title">{this.props.productName}</h4>
               <p className="card-text"style={{'fontSize':'20px'}}>Price: &#8377;{this.props.price}</p>
-              <button type="button" class="btn">Add to Cart</button>
+              <button type="button" className="btn" onClick={this.handleCartSubmit.bind(this)}>Add to Cart</button>
               <div style={{'marginTop':'20px'}}>
-              <button type="button" class="btn btn-primary">Buy Now</button>
+              <button type="button" className="btn btn-primary">Buy Now</button>
               </div>
               <p className="card-text" style={{'color':'black',textAlign:'left','marginTop':'20px'}}>{this.props.description}</p>
               

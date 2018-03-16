@@ -4,13 +4,13 @@ import fetch from 'isomorphic-fetch';
 import Cookies from 'universal-cookie';
 
 class Logout extends Component{
-
+	
 	removeCookies(){
 		const cookies = new Cookies();
-		cookies.remove('auth_token', { path: '/' });
-		cookies.remove('hasura_id', { path: '/' });
-		cookies.remove('username', { path: '/' });
-
+		cookies.set('auth_token', "None",{ path: '/' });
+		cookies.set('hasura_id', "None",{ path: '/' });
+		cookies.set('username', "None",{ path: '/' });
+				
 		alert('Logged Out succesfully')
 		this.props.history.push("/")
 	}

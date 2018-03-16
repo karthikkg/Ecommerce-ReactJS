@@ -49,7 +49,9 @@ class Login extends Component{
 			})
 			.catch(function(error) {
 				console.log('Request Failed:' + error);
-			});}
+			});
+			alert("Account Registered Successfully. Please Login")
+		}
 
 	sellerSignup(e){
 			e.preventDefault();
@@ -94,7 +96,9 @@ class Login extends Component{
 			})
 			.catch(function(error) {
 				console.log('Request Failed:' + error);
-			});}
+			});
+			alert("Account Registered Successfully. Please Login")
+		}
 
 	signIn(e){
 			e.preventDefault();
@@ -146,7 +150,9 @@ class Login extends Component{
 			})
 			.catch(function(error) {
 				console.log('Request Failed:' + error);
-			});}
+			});
+			alert("Login Successfull. Please Click on Home")
+		}
 	render(){
 		const style={
 			margin :'20px',
@@ -158,6 +164,7 @@ class Login extends Component{
 		
 		return(
 			<div className='container'>
+			<h6>Please Click on <b>Home</b> after logging in. Redirect does not work</h6>
 			<div className='row'>
 				<div className='col-md-5 col-md-offset-5'>
 				<div style={style} className="form-body">
